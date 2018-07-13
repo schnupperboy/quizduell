@@ -1,0 +1,5 @@
+[package]
+name = "quizduell"
+version = "0.1.0"
+
+[dependencies]
