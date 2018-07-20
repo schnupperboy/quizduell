@@ -1,10 +1,10 @@
 table! {
     questions (id) {
         id -> Int4,
-        questiontext -> Text,
-        optiona -> Text,
-        optionb -> Text,
-        optionc -> Text,
-        optiond -> Text,
+        question_text -> Text,
+        option_a -> Text,
+        option_b -> Text,
+        option_c -> Text,
+        option_d -> Text,
     }
 }
