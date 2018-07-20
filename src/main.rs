@@ -1,13 +1,26 @@
 extern crate hyper;
+extern crate diesel;
+extern crate serde;
+extern crate serde_json;
+extern crate quizduell;
 
 use hyper::{Body, Request, Response, Server};
 use hyper::rt::Future;
 use hyper::service::service_fn_ok;
-
-const PHRASE: &str = "is this a placeholder question?";
+use diesel::prelude::*;
+use quizduell::establish_connection;
+use quizduell::models::Question;
 
 fn get_questions(_req: Request<Body>) -> Response<Body> {
-    Response::new(Body::from(PHRASE))
+    use quizduell::schema::questions::dsl::*;
+
+    let connection = establish_connection();
+    let results = questions
+        .limit(5)
+        .load::<Question>(&connection)
+        .expect("Error loading questions");
+
+    Response::new(Body::from(serde_json::to_string(&results).unwrap()))
 }
 
 fn main() {

@@ -1,6 +1,6 @@
 use schema::questions;
 
-#[derive(Queryable)]
+#[derive(Queryable, Serialize, Deserialize, Debug)]
 pub struct Question {
     pub id: i32,
     pub question_text: String,
